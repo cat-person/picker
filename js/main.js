@@ -15,21 +15,17 @@ var App = {
         
 
         document.getElementById("output").textContent = msg;
-        document.getElementById("btn_get_contact").onclick = function() {
+        document.getElementById("btn_get_contact").onclick = async function() {
             document.getElementById("output").textContent = "get contacts clicked";
-            // Check if the device supports the contacts API
-            if (navigator.contacts) {
-                // Create a new contact picker instance
-                var contactPicker = new ContactPicker();
-            
-                // Set the callback function to handle the selected contacts
-                contactPicker.show(function(contacts) {
-                    // Do something with the selected contacts
-                    document.getElementById("output").textContent = contacts;
-                });
-            } else {
-                // Handle the case where the device does not support the contacts API
-                console.log("Device does not support contacts API");
+
+            const props = ['name', 'email', 'tel', 'address', 'icon'];
+            const opts = {multiple: true};
+
+            try {
+                const contacts = await navigator.contacts.select(props, opts);
+                handleResults(contacts);
+            } catch (ex) {
+                document.getElementById("output").textContent = ex
             }
 
         };
@@ -37,6 +33,10 @@ var App = {
     isContactSelectApiAvailable() {
         return ('contacts' in navigator && 'ContactsManager' in window);
     },
+
+    handleResults(contacts){
+        document.getElementById("output").textContent = contacts
+    }
 };
 
 window.onload = App.init.bind(App);
