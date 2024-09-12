@@ -23,9 +23,9 @@ var App = {
 
             try {
                 const contacts = await navigator.contacts.select(props, opts);
-                handleResults(contacts);
+                this.handleResults(contacts);
             } catch (ex) {
-                document.getElementById("output").textContent = ex
+                document.getElementById("output").textContent = "~~" + ex
             }
 
         };
