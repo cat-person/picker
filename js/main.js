@@ -23,7 +23,7 @@ var App = {
 
             try {
                 const contacts = await navigator.contacts.select(props, opts);
-                this.handleResults(contacts);
+                document.getElementById("output").textContent = contacts
             } catch (ex) {
                 document.getElementById("output").textContent = "~~" + ex
             }
@@ -33,10 +33,6 @@ var App = {
     isContactSelectApiAvailable() {
         return ('contacts' in navigator && 'ContactsManager' in window);
     },
-
-    handleResults(contacts){
-        document.getElementById("output").textContent = contacts
-    }
 };
 
 window.onload = App.init.bind(App);
