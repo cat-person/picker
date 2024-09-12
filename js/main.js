@@ -12,18 +12,20 @@ var App = {
             msg = "!!! Contact select api is not available";
         }
         console.log(msg)
-        
 
-        document.getElementById("output").textContent = msg;
+
+        // document.getElementById("output").textContent = msg;
         document.getElementById("btn_get_contact").onclick = async function() {
             document.getElementById("output").textContent = "get contacts clicked";
 
             const props = ['name', 'email', 'tel', 'address', 'icon'];
             const opts = {multiple: true};
 
+
+
             try {
                 const contacts = await navigator.contacts.select(props, opts);
-                document.getElementById("output").textContent = contacts
+                document.getElementById("output").textContent = JSON.stringify(contacts)
             } catch (ex) {
                 document.getElementById("output").textContent = "~~" + ex
             }
