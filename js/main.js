@@ -16,7 +16,7 @@ var App = {
 
         document.getElementById("output").textContent = msg;
         document.getElementById("btn_get_contact").onclick = function() {
-            "get contacts clicked";
+            document.getElementById("output").textContent = "get contacts clicked";
             // Check if the device supports the contacts API
             if (navigator.contacts) {
                 // Create a new contact picker instance
