@@ -24,8 +24,12 @@ var App = {
 
 
             try {
-                const contacts = await navigator.contacts.select(props, opts);
-                document.getElementById("output").textContent = JSON.stringify(contacts)
+                // const contacts = await navigator.contacts.select(props, opts);
+                const url = 'tel://contact?bundleID=com.example.contactapp';
+                const a = document.createElement('a');
+                a.href = url;
+                a.click();
+                // document.getElementById("output").textContent = JSON.stringify(contacts)
             } catch (ex) {
                 document.getElementById("output").textContent = "~~" + ex
             }
